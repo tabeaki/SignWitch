@@ -1,0 +1,8 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.buttom {
+    margin: -10px 0 0;
+  }
+  
