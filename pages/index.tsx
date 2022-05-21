@@ -97,7 +97,7 @@ const Home: NextPage = () => {
         await contract.preMint({value: ethers.utils.parseEther(tokenPrice)});
         toast('Starting to execute a transaction')
       }catch(error){
-        toast('Error')
+        toast('Not on the whitelist')
       }
 
     };
