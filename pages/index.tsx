@@ -14,19 +14,22 @@ declare global {
 }
 
 const abi = [
-  "function buy() external payable",
-  "function isSaleNow() view returns(bool)",
-  "function counter() view returns(uint)"
+  "function totalSupply() public view virtual override returns (uint256)",
+  "function publicMint() public payable",
+  "function preMint() public payable",
+  "function is_paused() public view returns (bool)",
+  "function ownerMint(uint256 count) public onlyOwner "
 ]
-const contractAddress = "0x58b639746E3e848b837F842ADf3771CFc2FCA805"
+const contractAddress = "0xa4b9d999c3671e1334045e63d99a9fadcddbea44"
 const notify = () => toast('Starting to execute a transaction')
 
 const Home: NextPage = () => {
 
-  const tokenPrice = "450";
+  //const tokenPrice = "450";
 
-  const [mintNum, setMintNum] = useState(0);
-  const [saleFlag, setSaleFlag] = useState(false);
+  const [mintNum, setMintNum] = useState(1);
+  const [paused, setpaused] = useState(false);
+  const mintNumber =1;
 
   useEffect(() => {
     const setSaleInfo = async() =>{
@@ -41,12 +44,12 @@ const Home: NextPage = () => {
       const contract = new ethers.Contract(contractAddress, abi, signer);
 
       try{
-        const mintNumber = (await contract.counter()).toString() - 1;
-        const saleFlag = await contract.isSaleNow();
+        const mintNumber = (await contract.totalSupply()).toString();
+        const paused = await contract.is_paused();
         console.log("mintNumber", mintNumber);
-        console.log("saleFlag", saleFlag);
+        console.log("paused", paused);
         setMintNum(mintNumber)
-        setSaleFlag(saleFlag)  
+        setpaused(paused)  
       }catch(e){
         console.log(e)
       }
@@ -80,19 +83,23 @@ const Home: NextPage = () => {
     addChain();
 
   }, []);
-
   // ミントボタン用
   function MintButton() {
-    console.log("MintButton")
 
     const MetaMuskConnect = async () =>{
       console.log("MetaMuskConnect")
       const provider = new ethers.providers.Web3Provider((window as any).ethereum)
       const accounts =  await provider.send("eth_requestAccounts", []);
       const signer = provider.getSigner()
+      const tokenPrice = "0.02";
       const contract = new ethers.Contract(contractAddress, abi, signer);
-      await contract.buy({value: ethers.utils.parseEther(tokenPrice)});
-      toast('Starting to execute a transaction')
+      try{
+        await contract.preMint({value: ethers.utils.parseEther(tokenPrice)});
+        toast('Starting to execute a transaction')
+      }catch(error){
+        toast('Error')
+      }
+
     };
     
     return <>
@@ -102,15 +109,15 @@ const Home: NextPage = () => {
       </div>
       <div className="px-44 py-40 bg-[url('/button_area.png')] text-center bg-center bg-contain bg-no-repeat">
           <h3 className="text-xs lg:text-4xl text-white font-semibold ">NFT Initial Sale</h3>
-          <h1 className="text-sm lg:text-2xl pt-1 text-white font-semibold ">START DATE: May 15th</h1>
+          <h1 className="text-sm lg:text-2xl pt-1 text-white font-semibold ">START DATE: May 29th</h1>
           {/*<h1 className="text-sm lg:text-2xl pt-1 text-white font-semibold ">14:00(UTC) | 23:00(JST)</h1>*/}<h1 className="text-sm lg:text-2xl pt-1 text-white font-semibold ">Time will be at a later date</h1>
           <h1 className="text-base lg:text-5xl pt-1 pb-2 text-white font-semibold "> {mintNum} / 10800</h1>        
-          { !saleFlag && <h3 className="sm:text-lg lg:text-3xl pt-1 text-white font-semibold ">Wait until the sale</h3>}
-          { (saleFlag && mintNum < 4000) && <button id="mintButton" className="px-4 py-2 my-1 sm:text-lg lg:text-2xl text-white font-semibold rounded bg-[#17F46D]" onClick={MetaMuskConnect}>NFT MINT</button>}
-          { (saleFlag && mintNum < 4000 && <Toaster/>)}
-          { (saleFlag && mintNum >= 4000) && <h3 className="sm:text-lg lg:text-3xl pt-1 text-white font-semibold ">End of sale</h3>}
+          { paused && <h3 className="sm:text-lg lg:text-3xl pt-1 text-white font-semibold ">Wait until the sale</h3>}
+          { (!paused && mintNum < 10800) && <button id="mintButton" className="px-4 py-2 my-1 sm:text-lg lg:text-2xl text-white font-semibold rounded bg-gradient-to-r from-purple-600 via-purple-600 to-blue-500" onClick={MetaMuskConnect}>NFT MINT</button>}
+          { (!paused && mintNum < 10800 && <Toaster/>)}
+          { (!paused && mintNum >= 10800) && <h3 className="sm:text-lg lg:text-3xl pt-1 text-white font-semibold ">End of sale</h3>}
       </div>
-    </div>
+    </div>  
     </>
   }
 
