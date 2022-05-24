@@ -18,9 +18,10 @@ const abi = [
   "function publicMint() public payable",
   "function preMint() public payable",
   "function is_paused() public view returns (bool)",
-  "function ownerMint(uint256 count) public onlyOwner "
+  "function ownerMint(uint256 count) public onlyOwner ",
+  "function is_presaleActive() public view returns (bool)",
 ]
-const contractAddress = "0xa4b9d999c3671e1334045e63d99a9fadcddbea44"
+const contractAddress = "0x155c5d3038025f7a6B13f64292e2e52EEB8647db"
 const notify = () => toast('Starting to execute a transaction')
 
 const Home: NextPage = () => {
@@ -29,6 +30,7 @@ const Home: NextPage = () => {
 
   const [mintNum, setMintNum] = useState(1);
   const [paused, setpaused] = useState(false);
+  const [presaleActive, setpresaleActive] = useState(false);
   const mintNumber =1;
 
   useEffect(() => {
@@ -46,8 +48,10 @@ const Home: NextPage = () => {
       try{
         const mintNumber = (await contract.totalSupply()).toString();
         const paused = await contract.is_paused();
+        const presaleActive = await contract.is_presaleActive();
         console.log("mintNumber", mintNumber);
         console.log("paused", paused);
+        setpresaleActive(presaleActive)
         setMintNum(mintNumber)
         setpaused(paused)  
       }catch(e){
@@ -93,12 +97,22 @@ const Home: NextPage = () => {
       const signer = provider.getSigner()
       const tokenPrice = "0.02";
       const contract = new ethers.Contract(contractAddress, abi, signer);
-      try{
-        await contract.preMint({value: ethers.utils.parseEther(tokenPrice)});
-        toast('Starting to execute a transaction')
-      }catch(error){
-        toast('Not on the whitelist')
+      if(presaleActive == false){
+        try{
+          await contract.publicMint({value: ethers.utils.parseEther(tokenPrice)});
+          toast('Starting to execute a transaction')
+        }catch(error){
+          toast('Connect to Astar NetWork')
+        }
+      } else {
+        try{
+          await contract.preMint({value: ethers.utils.parseEther(tokenPrice)});
+          toast('Starting to execute a transaction')
+        }catch(error){
+          toast('Not on the whitelist Or Connect to Astar NetWork')
+        }
       }
+      
 
     };
     
@@ -107,13 +121,14 @@ const Home: NextPage = () => {
       <div className='px-2 py-16 lg:px-28 lg:py-28'>
         <iframe className='w-full aspect-video' width="350" height="315" src="https://www.youtube.com/embed/IzJqpMPCrKc" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
       </div>
-      <div className="px-44 py-40 bg-[url('/button_area.png')] text-center bg-center bg-contain bg-no-repeat">
+      <div className="px-20 py-36 lg:px-44 lg:py-40 bg-[url('/button_area.png')] text-center bg-center bg-contain bg-no-repeat">
           <h3 className="text-xs lg:text-4xl text-white font-semibold ">NFT Initial Sale</h3>
           <h1 className="text-sm lg:text-2xl pt-1 text-white font-semibold ">START DATE: May 29th</h1>
-          {/*<h1 className="text-sm lg:text-2xl pt-1 text-white font-semibold ">14:00(UTC) | 23:00(JST)</h1>*/}<h1 className="text-sm lg:text-2xl pt-1 text-white font-semibold ">Time will be at a later date</h1>
+          <h1 className="text-sm lg:text-2xl pt-1 text-white font-semibold ">1:00 PM UST | 10:00 PM JST</h1>
           <h1 className="text-base lg:text-5xl pt-1 pb-2 text-white font-semibold "> {mintNum} / 10800</h1>        
           { paused && <h3 className="sm:text-lg lg:text-3xl pt-1 text-white font-semibold ">Wait until the sale</h3>}
-          { (!paused && mintNum < 10800) && <button id="mintButton" className="px-4 py-2 my-1 sm:text-lg lg:text-2xl text-white font-semibold rounded bg-gradient-to-r from-purple-600 via-purple-600 to-blue-500" onClick={MetaMuskConnect}>NFT MINT</button>}
+          { (!paused && presaleActive && mintNum < 10800) && <button id="mintButton" className="px-4 py-2 my-1 sm:text-lg lg:text-2xl text-white font-semibold rounded bg-gradient-to-r from-purple-600 via-purple-600 to-blue-500" onClick={MetaMuskConnect}>PRE MINT</button>}
+          { (!paused && !presaleActive && mintNum < 10800) && <button id="mintButton" className="px-4 py-2 my-1 sm:text-lg lg:text-2xl text-white font-semibold rounded bg-gradient-to-r from-purple-600 via-purple-600 to-blue-500" onClick={MetaMuskConnect}>PUBLIC MINT</button>}
           { (!paused && mintNum < 10800 && <Toaster/>)}
           { (!paused && mintNum >= 10800) && <h3 className="sm:text-lg lg:text-3xl pt-1 text-white font-semibold ">End of sale</h3>}
       </div>
