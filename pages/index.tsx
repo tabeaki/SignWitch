@@ -21,7 +21,7 @@ const abi = [
   "function ownerMint(uint256 count) public onlyOwner ",
   "function is_presaleActive() public view returns (bool)",
 ]
-const contractAddress = "0x155c5d3038025f7a6B13f64292e2e52EEB8647db"
+const contractAddress = "0x7b2152E51130439374672AF463b735a59a47ea85"
 const notify = () => toast('Starting to execute a transaction')
 
 const Home: NextPage = () => {
@@ -41,7 +41,6 @@ const Home: NextPage = () => {
       console.log(provider)
   
       const accounts =  await provider.send("eth_requestAccounts", []);
-      
       const signer = provider.getSigner()
       const contract = new ethers.Contract(contractAddress, abi, signer);
 
@@ -91,29 +90,26 @@ const Home: NextPage = () => {
   function MintButton() {
 
     const MetaMuskConnect = async () =>{
-      console.log("MetaMuskConnect")
       const provider = new ethers.providers.Web3Provider((window as any).ethereum)
       const accounts =  await provider.send("eth_requestAccounts", []);
       const signer = provider.getSigner()
-      const tokenPrice = "0.02";
+      const tokenPrice = "100";
       const contract = new ethers.Contract(contractAddress, abi, signer);
-      if(presaleActive == false){
-        try{
-          await contract.publicMint({value: ethers.utils.parseEther(tokenPrice)});
-          toast('Starting to execute a transaction')
-        }catch(error){
-          toast('Connect to Astar NetWork')
-        }
-      } else {
+      if(presaleActive == true){
         try{
           await contract.preMint({value: ethers.utils.parseEther(tokenPrice)});
           toast('Starting to execute a transaction')
         }catch(error){
-          toast('Not on the whitelist Or Connect to Astar NetWork')
+          toast('Not on the whitelist Or Connect to Astar NetWork Or Out of Fund')
+        }
+      } else {
+        try{
+          await contract.publicMint({value: ethers.utils.parseEther(tokenPrice)});
+          toast('Starting to execute a transaction')
+        }catch(error){
+          toast('Connect to Astar NetWork Or Out of Fund')
         }
       }
-      
-
     };
     
     return <>
