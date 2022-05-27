@@ -2,7 +2,7 @@ import type { NextPage } from 'next'
 import React, { useState, useEffect } from "react";
 import { ethers } from "ethers"
 import Image from 'next/image'
-import styles from '../styles/Home.module.css'
+import Seo from './components/Seo'
 import Header from './components/Header';
 import Footer from './components/Footer';
 import toast, { Toaster } from 'react-hot-toast'
@@ -25,7 +25,7 @@ const contractAddress = "0x7b2152E51130439374672AF463b735a59a47ea85"
 const notify = () => toast('Starting to execute a transaction')
 
 const Home: NextPage = () => {
-
+  
   //const tokenPrice = "450";
 
   const [mintNum, setMintNum] = useState(1);
@@ -136,6 +136,13 @@ const Home: NextPage = () => {
     <>
       <div className="">
       <Header />
+      <Seo
+        pageTitle={'Astar Sign Witch'}
+        pageDescription={'Astar Sign Witch'}
+        pageImg={'https://sign-witch.vercel.app/_next/image?url=%2Fmain_grap.png&w=3840&q=75'}
+        pageImgWidth={1280}
+        pageImgHeight={670}
+      />
       <Image className="min-w-full" src="/main_grap.png" alt="Main Image" width={1920} height={800}/>
       <MintButton />
       <Footer />
