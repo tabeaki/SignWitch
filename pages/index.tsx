@@ -140,8 +140,8 @@ const Home: NextPage = () => {
         pageTitle={'Astar Sign Witch'}
         pageDescription={'Astar Sign Witch'}
         pageImg={'https://sign-witch.vercel.app/_next/image?url=%2Fmain_grap.png&w=3840&q=75'}
-        pageImgWidth={1280}
-        pageImgHeight={670}
+        pageImgWidth={1920}
+        pageImgHeight={1005}
       />
       <Image className="min-w-full" src="/main_grap.png" alt="Main Image" width={1920} height={800}/>
       <MintButton />

@@ -20,14 +20,14 @@ const Seo: VFC<MetaData> = ({
   pageImgHeight
 }) => {
   const defaultTitle = 'demo'
-  const defaultDescription = 'demo'
+  const defaultDescription = 'Zodiac Signs x Witches x Echi-Echi = Strongest The project is aimed at a crypto-native IP. It is planned to be a manga and a game in the future. Please buy your constellation witch or your guess. We also plan to airdrop NFT in other chains if you are holding.'
 
   const title = pageTitle ? `${pageTitle} | ${defaultTitle}` : defaultTitle
   const description = pageDescription ? pageDescription : defaultDescription
   const url = pagePath
   const imgUrl = pageImg
-  const imgWidth = pageImgWidth ? pageImgWidth : 1280
-  const imgHeight = pageImgHeight ? pageImgHeight : 670
+  const imgWidth = pageImgWidth ? pageImgWidth : 1920
+  const imgHeight = pageImgHeight ? pageImgHeight : 1005
 
   return (
     <Head>
