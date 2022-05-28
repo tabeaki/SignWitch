@@ -124,7 +124,7 @@ const Home: NextPage = () => {
           <h1 className="text-base lg:text-5xl pt-1 pb-2 text-white font-semibold "> {mintNum} / 10800</h1>        
           { paused && <h3 className="sm:text-lg lg:text-3xl pt-1 text-white font-semibold ">Wait until the sale</h3>}
           { (!paused && presaleActive && mintNum < 10800) && <button id="mintButton" className="px-4 py-2 my-1 sm:text-lg lg:text-2xl text-white font-semibold rounded bg-gradient-to-r from-purple-600 via-purple-600 to-blue-500" onClick={MetaMuskConnect}>PRE MINT</button>}
-          { (!paused && !presaleActive && mintNum < 10800) && <button id="mintButton" className="px-4 py-2 my-1 sm:text-lg lg:text-2xl text-white font-semibold rounded bg-gradient-to-r from-purple-600 via-purple-600 to-blue-500" onClick={MetaMuskConnect}>PUBLIC MINT</button>}
+          {/* (!paused && !presaleActive && mintNum < 10800) && <button id="mintButton" className="px-4 py-2 my-1 sm:text-lg lg:text-2xl text-white font-semibold rounded bg-gradient-to-r from-purple-600 via-purple-600 to-blue-500" onClick={MetaMuskConnect}>PUBLIC MINT</button> */}
           { (!paused && mintNum < 10800 && <Toaster/>)}
           { (!paused && mintNum >= 10800) && <h3 className="sm:text-lg lg:text-3xl pt-1 text-white font-semibold ">End of sale</h3>}
       </div>
