@@ -28,7 +28,7 @@ const Home: NextPage = () => {
   
   //const tokenPrice = "450";
 
-  const [mintNum, setMintNum] = useState(1);
+  const [mintNum, setMintNum] = useState(0);
   const [paused, setpaused] = useState(false);
   const [presaleActive, setpresaleActive] = useState(false);
   const mintNumber =1;
@@ -122,7 +122,7 @@ const Home: NextPage = () => {
           <h1 className="text-sm lg:text-2xl pt-1 text-white font-semibold ">START DATE: May 29th</h1>
           <h1 className="text-sm lg:text-2xl pt-1 text-white font-semibold ">1:00 PM UTC | 10:00 PM JST</h1>
           <h1 className="text-base lg:text-5xl pt-1 pb-2 text-white font-semibold "> {mintNum} / 10800</h1>        
-          { paused && <h3 className="sm:text-lg lg:text-3xl pt-1 text-white font-semibold ">Wait until the sale</h3>}
+          { paused && <h3 className="text-lg lg:text-3xl pt-1 text-white font-semibold ">Wait until the sale</h3>}
           { (!paused && presaleActive && mintNum < 10800) && <button id="mintButton" className="px-4 py-2 my-1 sm:text-lg lg:text-2xl text-white font-semibold rounded bg-gradient-to-r from-purple-600 via-purple-600 to-blue-500" onClick={MetaMuskConnect}>PRE MINT</button>}
           {/* (!paused && !presaleActive && mintNum < 10800) && <button id="mintButton" className="px-4 py-2 my-1 sm:text-lg lg:text-2xl text-white font-semibold rounded bg-gradient-to-r from-purple-600 via-purple-600 to-blue-500" onClick={MetaMuskConnect}>PUBLIC MINT</button> */}
           { (!paused && mintNum < 10800 && <Toaster/>)}
