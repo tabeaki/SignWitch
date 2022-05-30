@@ -119,8 +119,6 @@ const Home: NextPage = () => {
       </div>
       <div className="px-40 py-80 lg:px-44 lg:py-40 bg-[url('/button_area.png')] text-center bg-center bg-contain bg-no-repeat">
           <h3 className="text-xs lg:text-4xl text-white font-semibold ">NFT Initial Sale</h3>
-          <h1 className="text-sm lg:text-2xl pt-1 text-white font-semibold ">PRE MINT: May 29th</h1>
-          <h1 className="text-sm lg:text-2xl pt-1 text-white font-semibold ">1:00 PM UTC | 10:00 PM JST</h1>
           <h1 className="text-sm lg:text-2xl pt-1 text-white font-semibold ">PUBLIC MINT: May 30th</h1>
           <h1 className="text-sm lg:text-2xl pt-1 text-white font-semibold ">1:00 PM UTC | 10:00 PM JST</h1>
           <h1 className="text-base lg:text-5xl pt-1 pb-2 text-white font-semibold "> {mintNum} / 10800</h1>        
