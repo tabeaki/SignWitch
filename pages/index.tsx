@@ -117,16 +117,16 @@ const Home: NextPage = () => {
       <div className='px-2 py-16 lg:px-28 lg:py-28'>
         <iframe className='w-full aspect-video' width="350" height="315" src="https://www.youtube.com/embed/IzJqpMPCrKc" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
       </div>
-      <div className="px-40 py-80 lg:px-44 lg:py-40 bg-[url('/button_area.png')] text-center bg-center bg-contain bg-no-repeat">
-          <h3 className="text-xs lg:text-4xl text-white font-semibold ">NFT Initial Sale</h3>
+      <div className="px-24 py-20 lg:px-44 lg:py-40 bg-[url('/button_area.png')] text-center bg-center bg-contain bg-no-repeat">
+          <h3 className="text-xs lg:text-4xl text-white font-semibold "></h3>
           <h1 className="text-sm lg:text-2xl pt-1 text-white font-semibold ">PUBLIC MINT: May 30th</h1>
           <h1 className="text-sm lg:text-2xl pt-1 text-white font-semibold ">1:00 PM UTC | 10:00 PM JST</h1>
           <h1 className="text-sm lg:text-2xl pt-1 text-white font-semibold "> 1 Witch 100ASTR</h1>
           <h1 className="text-base lg:text-5xl pt-1 pb-2 text-white font-semibold "> {mintNum} / 10800</h1>        
           { paused && <h3 className="text-lg lg:text-3xl pt-1 text-white font-semibold ">Wait until the sale</h3>}
-          { (!paused && presaleActive && mintNum < 10800) && <button id="mintButton" className="px-4 py-2 my-1 sm:text-lg lg:text-2xl text-white font-semibold rounded bg-gradient-to-r from-purple-600 via-purple-600 to-blue-500" onClick={MetaMuskConnect}>PUBLIC MINT</button>}
+          { (!paused && presaleActive && mintNum < 10800) && <button id="mintButton" className="px-4 py-2 my-1 sm:text-sm lg:text-2xl text-white font-semibold rounded bg-gradient-to-r from-purple-600 via-purple-600 to-blue-500" onClick={MetaMuskConnect}>PUBLIC MINT</button>}
           { (!paused && presaleActive && mintNum < 10800 && <Toaster/>)}
-          { (!paused && !presaleActive && mintNum < 10800) && <button id="mintButton" className="px-4 py-2 my-1 sm:text-lg lg:text-2xl text-white font-semibold rounded bg-gradient-to-r from-purple-600 via-purple-600 to-blue-500" onClick={MetaMuskConnect}>PUBLIC MINT</button>}
+          { (!paused && !presaleActive && mintNum < 10800) && <button id="mintButton" className="px-4 py-2 my-1 sm:text-sm lg:text-2xl text-white font-semibold rounded bg-gradient-to-r from-purple-600 via-purple-600 to-blue-500" onClick={MetaMuskConnect}>PUBLIC MINT</button>}
           { (!paused && !presaleActive && mintNum < 10800 && <Toaster/>)}
           { (!paused && mintNum >= 10800) && <h3 className="sm:text-lg lg:text-3xl pt-1 text-white font-semibold ">End of sale</h3>}
       </div>
