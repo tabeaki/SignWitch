@@ -7,11 +7,13 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import toast, { Toaster } from 'react-hot-toast'
 
+
 declare global {
   interface Window {
     ethereum: any;
   }
 }
+
 
 const abi = [
   "function totalSupply() public view virtual override returns (uint256)",
@@ -20,6 +22,7 @@ const abi = [
   "function is_paused() public view returns (bool)",
   "function ownerMint(uint256 count) public onlyOwner ",
   "function is_presaleActive() public view returns (bool)",
+  "function ownerOf(uint256 tokenId) external view returns (address owner)"
 ]
 const contractAddress = "0x7b2152E51130439374672AF463b735a59a47ea85"
 const notify = () => toast('Starting to execute a transaction')
@@ -32,6 +35,7 @@ const Home: NextPage = () => {
   const [paused, setpaused] = useState(false);
   const [presaleActive, setpresaleActive] = useState(false);
   const mintNumber =1;
+
 
   useEffect(() => {
     const setSaleInfo = async() =>{
@@ -95,21 +99,35 @@ const Home: NextPage = () => {
       const signer = provider.getSigner()
       const tokenPrice = "100";
       const contract = new ethers.Contract(contractAddress, abi, signer);
-      if(presaleActive == true){
-        try{
-          await contract.preMint({value: ethers.utils.parseEther(tokenPrice)});
-          toast('Starting to execute a transaction')
-        }catch(error){
-          toast('Not on the whitelist Or Connect to Astar NetWork Or Out of Fund')
-        }
-      } else {
-        try{
-          await contract.publicMint({value: ethers.utils.parseEther(tokenPrice)});
-          toast('Starting to execute a transaction')
-        }catch(error){
-          toast('Connect to Astar NetWork Or Out of Fund')
-        }
+
+      const fileName = 'owners.json';
+
+      const total = (await contract.totalSupply()).toNumber();
+      console.log(`total: ${total}`);
+      const addressList = Array(total);
+      for (let i = 1; i <= 3000; i++) {
+        const address = await contract.ownerOf(i);
+        console.log(`id: ${i}, address: ${address}`);
+        addressList[i] = address;
       }
+      //const fs = await require("fs");
+      //fs.writeFileSync(fileName, JSON.stringify({ all: addressList, unique: [...new Set(addressList)] }, null, 2))
+
+      // if(presaleActive == true){
+      //   try{
+      //     await contract.preMint({value: ethers.utils.parseEther(tokenPrice)});
+      //     toast('Starting to execute a transaction')
+      //   }catch(error){
+      //     toast('Not on the whitelist Or Connect to Astar NetWork Or Out of Fund')
+      //   }
+      // } else {
+      //   try{
+      //     await contract.publicMint({value: ethers.utils.parseEther(tokenPrice)});
+      //     toast('Starting to execute a transaction')
+      //   }catch(error){
+      //     toast('Connect to Astar NetWork Or Out of Fund')
+      //   }
+      // }
     };
     
     return <>
@@ -129,6 +147,8 @@ const Home: NextPage = () => {
           { (!paused && !presaleActive && mintNum < 10800) && <button id="mintButton" className="px-4 py-2 my-1 sm:text-sm lg:text-2xl text-white font-semibold rounded bg-gradient-to-r from-purple-600 via-purple-600 to-blue-500" onClick={MetaMuskConnect}>PUBLIC MINT</button>}
           { (!paused && !presaleActive && mintNum < 10800 && <Toaster/>)}
           { (!paused && mintNum >= 10800) && <h3 className="sm:text-lg lg:text-3xl pt-1 text-white font-semibold ">End of sale</h3>}
+          <button id="mintButton" className="px-4 py-2 my-1 sm:text-sm lg:text-2xl text-white font-semibold rounded bg-gradient-to-r from-purple-600 via-purple-600 to-blue-500" onClick={MetaMuskConnect}>PUBLIC MINT</button>
+          <Toaster/>
       </div>
     </div>  
     </>
