@@ -131,6 +131,16 @@ const Home: NextPage = () => {
     };
     
     return <>
+    <div className="flex flex-wrap buttom justify-center bg-[url('/background.gif')] bg-center bg-cover">
+      <div className="m-16 px-2 py-20 lg:px-20 lg:py-16 border-double border-8 rounded-md bg-black text-center bg-center bg-contain bg-no-repeat">
+          <h3 className="text-xs lg:text-4xl text-white font-semibold ">Optimism NFT</h3>
+          <h1 className="text-sm lg:text-2xl pt-1 text-white font-semibold ">SATAR MINT: May 30th</h1>
+          <h1 className="text-sm lg:text-2xl pt-1 text-white font-semibold ">1:00 PM UTC | 10:00 PM JST</h1>
+          <h1 className="text-base lg:text-5xl pt-1 pb-2 text-white font-semibold "> {mintNum} / 6000</h1>        
+          { paused && <h3 className="text-lg lg:text-3xl pt-1 text-white font-semibold ">Wait until the sale</h3>}
+          { (!paused && !presaleActive && mintNum < 10800) && <button id="mintButton" className="px-4 py-2 my-1 sm:text-lg lg:text-2xl text-white font-semibold rounded bg-gradient-to-r from-gray-500 via-gray-600 to-gray-700" onClick={MetaMuskConnect}>FREE MINT</button>}
+          </div>
+    </div>  
     <div className="flex flex-wrap buttom justify-center bg-[url('/background.png')] bg-center bg-cover">
       <div className='px-2 py-16 lg:px-28 lg:py-28'>
         <iframe className='w-full aspect-video' width="350" height="315" src="https://www.youtube.com/embed/IzJqpMPCrKc" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
