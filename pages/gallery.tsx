@@ -4,8 +4,8 @@ import { ethers } from "ethers"
 import Image from 'next/image'
 import Seo from './components/Seo'
 import Header from './components/Header';
-import Footer from './components/Footer';
 import toast, { Toaster } from 'react-hot-toast'
+import {Link as Scroll} from "react-scroll"
 
 declare global {
   interface Window {
@@ -108,6 +108,68 @@ const Home: NextPage = () => {
           if (ownerOfNum > 0) {
             return <span>
               <div className="justify-center bg-[url('/background.png')] bg-center bg-cover">
+                <Scroll to="Sagittarius" smooth={true} duration={600} offset={-30}>
+                  <a className="my-1 text-sm font-medium text-gray-700 transition-colors duration-200 transform 
+                  dark:text-gray-200 hover:text-blue-500 dark:hover:text-blue-400 md:mx-4 md:my-0">Sagittarius</a>        
+                </Scroll>
+                <Scroll to="Aquarius" smooth={true} duration={600} offset={-30}>
+                  <a className="my-1 text-sm font-medium text-gray-700 transition-colors duration-200 transform 
+                  dark:text-gray-200 hover:text-blue-500 dark:hover:text-blue-400 md:mx-4 md:my-0">Aquarius</a>        
+                </Scroll>
+                <Scroll to="Aries" smooth={true} duration={600} offset={-30}>
+                  <a className="my-1 text-sm font-medium text-gray-700 transition-colors duration-200 transform 
+                  dark:text-gray-200 hover:text-blue-500 dark:hover:text-blue-400 md:mx-4 md:my-0">Aries</a>        
+                </Scroll>
+                <Scroll to="Cancer" smooth={true} duration={600} offset={-30}>
+                  <a className="my-1 text-sm font-medium text-gray-700 transition-colors duration-200 transform 
+                  dark:text-gray-200 hover:text-blue-500 dark:hover:text-blue-400 md:mx-4 md:my-0">Cancer</a>        
+                </Scroll>
+                <Scroll to="Capricorn" smooth={true} duration={600} offset={-30}>
+                  <a className="my-1 text-sm font-medium text-gray-700 transition-colors duration-200 transform 
+                  dark:text-gray-200 hover:text-blue-500 dark:hover:text-blue-400 md:mx-4 md:my-0">Capricorn</a>        
+                </Scroll>
+                <Scroll to="Gemini" smooth={true} duration={600} offset={-30}>
+                  <a className="my-1 text-sm font-medium text-gray-700 transition-colors duration-200 transform 
+                  dark:text-gray-200 hover:text-blue-500 dark:hover:text-blue-400 md:mx-4 md:my-0">Gemini</a>        
+                </Scroll>
+                <Scroll to="Leo" smooth={true} duration={600} offset={-30}>
+                  <a className="my-1 text-sm font-medium text-gray-700 transition-colors duration-200 transform 
+                  dark:text-gray-200 hover:text-blue-500 dark:hover:text-blue-400 md:mx-4 md:my-0">Leo</a>        
+                </Scroll>
+                <Scroll to="Libra" smooth={true} duration={600} offset={-30}>
+                  <a className="my-1 text-sm font-medium text-gray-700 transition-colors duration-200 transform 
+                  dark:text-gray-200 hover:text-blue-500 dark:hover:text-blue-400 md:mx-4 md:my-0">Libra</a>        
+                </Scroll>
+                <Scroll to="Pisces" smooth={true} duration={600} offset={-30}>
+                  <a className="my-1 text-sm font-medium text-gray-700 transition-colors duration-200 transform 
+                  dark:text-gray-200 hover:text-blue-500 dark:hover:text-blue-400 md:mx-4 md:my-0">Pisces</a>        
+                </Scroll>
+                <Scroll to="Scorpio" smooth={true} duration={600} offset={-30}>
+                  <a className="my-1 text-sm font-medium text-gray-700 transition-colors duration-200 transform 
+                  dark:text-gray-200 hover:text-blue-500 dark:hover:text-blue-400 md:mx-4 md:my-0">Scorpio</a>        
+                </Scroll>
+                <Scroll to="Taurus" smooth={true} duration={600} offset={-30}>
+                  <a className="my-1 text-sm font-medium text-gray-700 transition-colors duration-200 transform 
+                  dark:text-gray-200 hover:text-blue-500 dark:hover:text-blue-400 md:mx-4 md:my-0">Taurus</a>        
+                </Scroll>
+                <Scroll to="Virgo" smooth={true} duration={600} offset={-30}>
+                  <a className="my-1 text-sm font-medium text-gray-700 transition-colors duration-200 transform 
+                  dark:text-gray-200 hover:text-blue-500 dark:hover:text-blue-400 md:mx-4 md:my-0">Virgo</a>        
+                </Scroll>
+                <Scroll to="RubblePunkz" smooth={true} duration={600} offset={-30}>
+                  <a className="my-1 text-sm font-medium text-gray-700 transition-colors duration-200 transform 
+                  dark:text-gray-200 hover:text-blue-500 dark:hover:text-blue-400 md:mx-4 md:my-0">RubblePunks</a>        
+                </Scroll>
+                <Scroll to="Tempura" smooth={true} duration={600} offset={-30}>
+                  <a className="my-1 text-sm font-medium text-gray-700 transition-colors duration-200 transform 
+                  dark:text-gray-200 hover:text-blue-500 dark:hover:text-blue-400 md:mx-4 md:my-0">Tempura</a>        
+                </Scroll>
+                <Scroll to="JPYC" smooth={true} duration={600} offset={-30}>
+                  <a className="my-1 text-sm font-medium text-gray-700 transition-colors duration-200 transform 
+                  dark:text-gray-200 hover:text-blue-500 dark:hover:text-blue-400 md:mx-4 md:my-0">JPYC</a>        
+                </Scroll>
+              </div>
+              <div id="Sagittarius" className="justify-center bg-[url('/background.png')] bg-center bg-cover">
                 <h1 className="text-sm lg:text-2xl px-10 text-white font-semibold ">Sagittarius</h1>
                 <Image className="min-w-full" src="/chara/Sagittarius0.png" alt="Main Image" width={252} height={358}/>
                 <Image className="min-w-full" src="/chara/Sagittarius1.png" alt="Main Image" width={252} height={358}/>
@@ -116,7 +178,7 @@ const Home: NextPage = () => {
                 <Image className="min-w-full" src="/chara/Sagittarius4.png" alt="Main Image" width={252} height={358}/>
                 <Image className="min-w-full" src="/chara/Sagittarius5.png" alt="Main Image" width={252} height={358}/>
               </div>
-              <div className="justify-center bg-[url('/background.png')] bg-center bg-cover">
+              <div id="Aquarius" className="justify-center bg-[url('/background.png')] bg-center bg-cover">
                 <h1 className="text-sm lg:text-2xl px-10 text-white font-semibold ">Aquarius</h1>
                 <Image className="min-w-full" src="/chara/Aquarius0.png" alt="Main Image" width={252} height={358}/>
                 <Image className="min-w-full" src="/chara/Aquarius1.png" alt="Main Image" width={252} height={358}/>
@@ -125,7 +187,7 @@ const Home: NextPage = () => {
                 <Image className="min-w-full" src="/chara/Aquarius4.png" alt="Main Image" width={252} height={358}/>
                 <Image className="min-w-full" src="/chara/Aquarius5.png" alt="Main Image" width={252} height={358}/>
               </div>
-              <div className="justify-center bg-[url('/background.png')] bg-center bg-cover">
+              <div id="Aries" className="justify-center bg-[url('/background.png')] bg-center bg-cover">
                 <h1 className="text-sm lg:text-2xl px-10 text-white font-semibold ">Aries</h1>
                 <Image className="min-w-full" src="/chara/Aries0.png" alt="Main Image" width={252} height={358}/>
                 <Image className="min-w-full" src="/chara/Aries1.png" alt="Main Image" width={252} height={358}/>
@@ -134,7 +196,7 @@ const Home: NextPage = () => {
                 <Image className="min-w-full" src="/chara/Aries4.png" alt="Main Image" width={252} height={358}/>
                 <Image className="min-w-full" src="/chara/Aries5.png" alt="Main Image" width={252} height={358}/>
               </div>
-              <div className="justify-center bg-[url('/background.png')] bg-center bg-cover">
+              <div id="Cancer" className="justify-center bg-[url('/background.png')] bg-center bg-cover">
                 <h1 className="text-sm lg:text-2xl px-10 text-white font-semibold ">Cancer</h1>
                 <Image className="min-w-full" src="/chara/Cancer0.png" alt="Main Image" width={252} height={358}/>
                 <Image className="min-w-full" src="/chara/Cancer1.png" alt="Main Image" width={252} height={358}/>
@@ -143,7 +205,7 @@ const Home: NextPage = () => {
                 <Image className="min-w-full" src="/chara/Cancer4.png" alt="Main Image" width={252} height={358}/>
                 <Image className="min-w-full" src="/chara/Cancer5.png" alt="Main Image" width={252} height={358}/>
               </div>
-              <div className="justify-center bg-[url('/background.png')] bg-center bg-cover">
+              <div id="Capricorn" className="justify-center bg-[url('/background.png')] bg-center bg-cover">
                 <h1 className="text-sm lg:text-2xl px-10 text-white font-semibold ">Capricorn</h1>
                 <Image className="min-w-full" src="/chara/Capricorn0.png" alt="Main Image" width={252} height={358}/>
                 <Image className="min-w-full" src="/chara/Capricorn1.png" alt="Main Image" width={252} height={358}/>
@@ -152,7 +214,7 @@ const Home: NextPage = () => {
                 <Image className="min-w-full" src="/chara/Capricorn4.png" alt="Main Image" width={252} height={358}/>
                 <Image className="min-w-full" src="/chara/Capricorn5.png" alt="Main Image" width={252} height={358}/>
               </div>
-              <div className="justify-center bg-[url('/background.png')] bg-center bg-cover">
+              <div id="Gemini" className="justify-center bg-[url('/background.png')] bg-center bg-cover">
                 <h1 className="text-sm lg:text-2xl px-10 text-white font-semibold ">Gemini</h1>
                 <Image className="min-w-full" src="/chara/Gemini0.png" alt="Main Image" width={252} height={358}/>
                 <Image className="min-w-full" src="/chara/Gemini1.png" alt="Main Image" width={252} height={358}/>
@@ -161,7 +223,7 @@ const Home: NextPage = () => {
                 <Image className="min-w-full" src="/chara/Gemini4.png" alt="Main Image" width={252} height={358}/>
                 <Image className="min-w-full" src="/chara/Gemini5.png" alt="Main Image" width={252} height={358}/>
               </div>
-              <div className="justify-center bg-[url('/background.png')] bg-center bg-cover">
+              <div id="Leo" className="justify-center bg-[url('/background.png')] bg-center bg-cover">
                 <h1 className="text-sm lg:text-2xl px-10 text-white font-semibold ">Leo</h1>
                 <Image className="min-w-full" src="/chara/Leo0.png" alt="Main Image" width={252} height={358}/>
                 <Image className="min-w-full" src="/chara/Leo1.png" alt="Main Image" width={252} height={358}/>
@@ -170,7 +232,7 @@ const Home: NextPage = () => {
                 <Image className="min-w-full" src="/chara/Leo4.png" alt="Main Image" width={252} height={358}/>
                 <Image className="min-w-full" src="/chara/Leo5.png" alt="Main Image" width={252} height={358}/>
               </div>
-              <div className="justify-center bg-[url('/background.png')] bg-center bg-cover">
+              <div id="Libra" className="justify-center bg-[url('/background.png')] bg-center bg-cover">
                 <h1 className="text-sm lg:text-2xl px-10 text-white font-semibold ">Libra</h1>
                 <Image className="min-w-full" src="/chara/Libra0.png" alt="Libra0" width={252} height={358}/>
                 <Image className="min-w-full" src="/chara/Libra1.png" alt="Libra1" width={252} height={358}/>
@@ -179,7 +241,7 @@ const Home: NextPage = () => {
                 <Image className="min-w-full" src="/chara/Libra4.png" alt="Libra4" width={252} height={358}/>
                 <Image className="min-w-full" src="/chara/Libra5.png" alt="Libra5" width={252} height={358}/>
               </div>
-              <div className="justify-center bg-[url('/background.png')] bg-center bg-cover">
+              <div id="Pisces" className="justify-center bg-[url('/background.png')] bg-center bg-cover">
                 <h1 className="text-sm lg:text-2xl px-10 text-white font-semibold ">Pisces</h1>
                 <Image className="min-w-full" src="/chara/Pisces0.png" alt="Pisces0" width={252} height={358}/>
                 <Image className="min-w-full" src="/chara/Pisces1.png" alt="Pisces1" width={252} height={358}/>
@@ -188,7 +250,7 @@ const Home: NextPage = () => {
                 <Image className="min-w-full" src="/chara/Pisces4.png" alt="Pisces4" width={252} height={358}/>
                 <Image className="min-w-full" src="/chara/Pisces5.png" alt="Pisces5" width={252} height={358}/>
               </div>
-              <div className="justify-center bg-[url('/background.png')] bg-center bg-cover">
+              <div id="Scorpio" className="justify-center bg-[url('/background.png')] bg-center bg-cover">
                 <h1 className="text-sm lg:text-2xl px-10 text-white font-semibold ">Scorpio</h1>
                 <Image className="min-w-full" src="/chara/Scorpio0.png" alt="Scorpio0" width={252} height={358}/>
                 <Image className="min-w-full" src="/chara/Scorpio1.png" alt="Scorpio1" width={252} height={358}/>
@@ -197,7 +259,7 @@ const Home: NextPage = () => {
                 <Image className="min-w-full" src="/chara/Scorpio4.png" alt="Scorpio4" width={252} height={358}/>
                 <Image className="min-w-full" src="/chara/Scorpio5.png" alt="Scorpio5" width={252} height={358}/>
               </div>
-              <div className="justify-center bg-[url('/background.png')] bg-center bg-cover">
+              <div id="Taurus" className="justify-center bg-[url('/background.png')] bg-center bg-cover">
                 <h1 className="text-sm lg:text-2xl px-10 text-white font-semibold ">Taurus</h1>
                 <Image className="min-w-full" src="/chara/Taurus0.png" alt="Taurus0" width={252} height={358}/>
                 <Image className="min-w-full" src="/chara/Taurus1.png" alt="Taurus1" width={252} height={358}/>
@@ -206,7 +268,7 @@ const Home: NextPage = () => {
                 <Image className="min-w-full" src="/chara/Taurus4.png" alt="Taurus4" width={252} height={358}/>
                 <Image className="min-w-full" src="/chara/Taurus5.png" alt="Taurus5" width={252} height={358}/>
               </div>
-              <div className="justify-center bg-[url('/background.png')] bg-center bg-cover">
+              <div id="Virgo" className="justify-center bg-[url('/background.png')] bg-center bg-cover">
                 <h1 className="text-sm lg:text-2xl px-10 text-white font-semibold ">Virgo</h1>
                 <Image className="min-w-full" src="/chara/Virgo0.png" alt="Virgo0" width={252} height={358}/>
                 <Image className="min-w-full" src="/chara/Virgo1.png" alt="Virgo1" width={252} height={358}/>
@@ -215,16 +277,32 @@ const Home: NextPage = () => {
                 <Image className="min-w-full" src="/chara/Virgo4.png" alt="Virgo4" width={252} height={358}/>
                 <Image className="min-w-full" src="/chara/Virgo5.png" alt="Virgo5" width={252} height={358}/>
               </div>
-              <div className="justify-center bg-[url('/background.png')] bg-center bg-cover">
-                <h1 className="text-sm lg:text-2xl px-10 text-white font-semibold ">RubblePunks (Collabo witch)</h1>
+              <div id="RubblePunkz" className="justify-center bg-[url('/background.png')] bg-center bg-cover">
+                <h1 className="text-sm lg:text-2xl px-10 text-white font-semibold underline"><a className="px-2 py-4" href="https://twitter.com/Rubble_Punkz">RubblePunkz (Collabo witch)</a></h1>
                 <Image className="min-w-full" src="/chara/Wtichcollabo_RubblePunks.png" alt="Rubble" width={252} height={358}/>
               </div>
-              <div className="justify-center bg-[url('/background.png')] bg-center bg-cover">
+              <div id="Tempura" className="justify-center bg-[url('/background.png')] bg-center bg-cover">
                 <div>
-                  <h1 className="text-sm lg:text-2xl px-10 text-white font-semibold ">Tempura (Collabo witch)</h1>
-                  <a className="px-2 py-4 bg-[url('/twiter_icon.png') text-center bg-center bg-no-repeat bg-cover" href="https://twitter.com/AstarSignWitch"></a> 
+                  <h1 className="text-sm lg:text-2xl px-10 text-white font-semibold underline"><a className="px-2 py-4" href="https://twitter.com/entirelytempura">Tempura (Collabo witch)</a></h1>
                 </div>
                 <Image className="min-w-full" src="/chara/Wtichcollabo_Tempura.png" alt="Rubble" width={252} height={358}/>
+              </div>
+              <div id="JPYC" className="justify-center bg-[url('/background.png')] bg-center bg-cover">
+                <div>
+                  <h1 className="text-sm lg:text-2xl px-10 text-white font-semibold underline"><a className="px-2 py-4" href="https://twitter.com/jcam_official">JPYC (Collabo witch)</a></h1>
+                </div>
+                <Image className="min-w-full" src="/chara/JPYC_Aquarius.png" alt="JPYC_Aquarius" width={252} height={358}/>
+                <Image className="min-w-full" src="/chara/JPYC_Aries.png" alt="JPYC_Aries" width={252} height={358}/>
+                <Image className="min-w-full" src="/chara/JPYC_Cancer.png" alt="JPYC_Cancer" width={252} height={358}/>
+                <Image className="min-w-full" src="/chara/JPYC_Capricorn.png" alt="JPYC_Capricorn" width={252} height={358}/>
+                <Image className="min-w-full" src="/chara/JPYC_Gemini.png" alt="JPYC_Gemini" width={252} height={358}/>
+                <Image className="min-w-full" src="/chara/JPYC_Leo.png" alt="JPYC_Leo" width={252} height={358}/>
+                <Image className="min-w-full" src="/chara/JPYC_Libra.png" alt="JPYC_Libra" width={252} height={358}/>
+                <Image className="min-w-full" src="/chara/JPYC_Pisces.png" alt="JPYC_Pisces" width={252} height={358}/>
+                <Image className="min-w-full" src="/chara/JPYC_Sagittarius.png" alt="JPYC_Sagittarius" width={252} height={358}/>
+                <Image className="min-w-full" src="/chara/JPYC_Scopio.png" alt="JPYC_Scopio" width={252} height={358}/>
+                <Image className="min-w-full" src="/chara/JPYC_Taurus.png" alt="JPYC_Taurus" width={252} height={358}/>
+                <Image className="min-w-full" src="/chara/JPYC_Virgo.png" alt="JPYC_Virgo" width={252} height={358}/>
               </div>
             </span>
           } 
