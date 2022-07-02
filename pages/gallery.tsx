@@ -108,7 +108,7 @@ const Home: NextPage = () => {
           if (ownerOfNum > 0) {
             return <span>
               <div className="justify-center bg-[url('/background.png')] bg-center bg-cover">
-                <h1 className="text-sm lg:text-2xl px-10 text-white font-semibold ">sagitarius</h1>
+                <h1 className="text-sm lg:text-2xl px-10 text-white font-semibold ">Sagittarius</h1>
                 <Image className="min-w-full" src="/chara/Sagittarius0.png" alt="Main Image" width={252} height={358}/>
                 <Image className="min-w-full" src="/chara/Sagittarius1.png" alt="Main Image" width={252} height={358}/>
                 <Image className="min-w-full" src="/chara/Sagittarius2.png" alt="Main Image" width={252} height={358}/>
