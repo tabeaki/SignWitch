@@ -170,7 +170,6 @@ const Home: NextPage = () => {
                 </Scroll>
               </div>
               <div id="Sagittarius" className="justify-center bg-[url('/background.png')] bg-center bg-cover">
-                <h1 className="text-sm lg:text-2xl px-10 text-white font-semibold ">Sagittarius</h1>
                 <Image className="min-w-full" src="/chara/Sagittarius0.png" alt="Main Image" width={252} height={358}/>
                 <Image className="min-w-full" src="/chara/Sagittarius1.png" alt="Main Image" width={252} height={358}/>
                 <Image className="min-w-full" src="/chara/Sagittarius2.png" alt="Main Image" width={252} height={358}/>
@@ -179,7 +178,6 @@ const Home: NextPage = () => {
                 <Image className="min-w-full" src="/chara/Sagittarius5.png" alt="Main Image" width={252} height={358}/>
               </div>
               <div id="Aquarius" className="justify-center bg-[url('/background.png')] bg-center bg-cover">
-                <h1 className="text-sm lg:text-2xl px-10 text-white font-semibold ">Aquarius</h1>
                 <Image className="min-w-full" src="/chara/Aquarius0.png" alt="Main Image" width={252} height={358}/>
                 <Image className="min-w-full" src="/chara/Aquarius1.png" alt="Main Image" width={252} height={358}/>
                 <Image className="min-w-full" src="/chara/Aquarius2.png" alt="Main Image" width={252} height={358}/>
@@ -188,7 +186,6 @@ const Home: NextPage = () => {
                 <Image className="min-w-full" src="/chara/Aquarius5.png" alt="Main Image" width={252} height={358}/>
               </div>
               <div id="Aries" className="justify-center bg-[url('/background.png')] bg-center bg-cover">
-                <h1 className="text-sm lg:text-2xl px-10 text-white font-semibold ">Aries</h1>
                 <Image className="min-w-full" src="/chara/Aries0.png" alt="Main Image" width={252} height={358}/>
                 <Image className="min-w-full" src="/chara/Aries1.png" alt="Main Image" width={252} height={358}/>
                 <Image className="min-w-full" src="/chara/Aries2.png" alt="Main Image" width={252} height={358}/>
@@ -197,7 +194,6 @@ const Home: NextPage = () => {
                 <Image className="min-w-full" src="/chara/Aries5.png" alt="Main Image" width={252} height={358}/>
               </div>
               <div id="Cancer" className="justify-center bg-[url('/background.png')] bg-center bg-cover">
-                <h1 className="text-sm lg:text-2xl px-10 text-white font-semibold ">Cancer</h1>
                 <Image className="min-w-full" src="/chara/Cancer0.png" alt="Main Image" width={252} height={358}/>
                 <Image className="min-w-full" src="/chara/Cancer1.png" alt="Main Image" width={252} height={358}/>
                 <Image className="min-w-full" src="/chara/Cancer2.png" alt="Main Image" width={252} height={358}/>
@@ -206,7 +202,6 @@ const Home: NextPage = () => {
                 <Image className="min-w-full" src="/chara/Cancer5.png" alt="Main Image" width={252} height={358}/>
               </div>
               <div id="Capricorn" className="justify-center bg-[url('/background.png')] bg-center bg-cover">
-                <h1 className="text-sm lg:text-2xl px-10 text-white font-semibold ">Capricorn</h1>
                 <Image className="min-w-full" src="/chara/Capricorn0.png" alt="Main Image" width={252} height={358}/>
                 <Image className="min-w-full" src="/chara/Capricorn1.png" alt="Main Image" width={252} height={358}/>
                 <Image className="min-w-full" src="/chara/Capricorn2.png" alt="Main Image" width={252} height={358}/>
@@ -215,7 +210,6 @@ const Home: NextPage = () => {
                 <Image className="min-w-full" src="/chara/Capricorn5.png" alt="Main Image" width={252} height={358}/>
               </div>
               <div id="Gemini" className="justify-center bg-[url('/background.png')] bg-center bg-cover">
-                <h1 className="text-sm lg:text-2xl px-10 text-white font-semibold ">Gemini</h1>
                 <Image className="min-w-full" src="/chara/Gemini0.png" alt="Main Image" width={252} height={358}/>
                 <Image className="min-w-full" src="/chara/Gemini1.png" alt="Main Image" width={252} height={358}/>
                 <Image className="min-w-full" src="/chara/Gemini2.png" alt="Main Image" width={252} height={358}/>
@@ -224,7 +218,6 @@ const Home: NextPage = () => {
                 <Image className="min-w-full" src="/chara/Gemini5.png" alt="Main Image" width={252} height={358}/>
               </div>
               <div id="Leo" className="justify-center bg-[url('/background.png')] bg-center bg-cover">
-                <h1 className="text-sm lg:text-2xl px-10 text-white font-semibold ">Leo</h1>
                 <Image className="min-w-full" src="/chara/Leo0.png" alt="Main Image" width={252} height={358}/>
                 <Image className="min-w-full" src="/chara/Leo1.png" alt="Main Image" width={252} height={358}/>
                 <Image className="min-w-full" src="/chara/Leo2.png" alt="Main Image" width={252} height={358}/>
@@ -233,7 +226,6 @@ const Home: NextPage = () => {
                 <Image className="min-w-full" src="/chara/Leo5.png" alt="Main Image" width={252} height={358}/>
               </div>
               <div id="Libra" className="justify-center bg-[url('/background.png')] bg-center bg-cover">
-                <h1 className="text-sm lg:text-2xl px-10 text-white font-semibold ">Libra</h1>
                 <Image className="min-w-full" src="/chara/Libra0.png" alt="Libra0" width={252} height={358}/>
                 <Image className="min-w-full" src="/chara/Libra1.png" alt="Libra1" width={252} height={358}/>
                 <Image className="min-w-full" src="/chara/Libra2.png" alt="Libra2" width={252} height={358}/>
@@ -242,7 +234,6 @@ const Home: NextPage = () => {
                 <Image className="min-w-full" src="/chara/Libra5.png" alt="Libra5" width={252} height={358}/>
               </div>
               <div id="Pisces" className="justify-center bg-[url('/background.png')] bg-center bg-cover">
-                <h1 className="text-sm lg:text-2xl px-10 text-white font-semibold ">Pisces</h1>
                 <Image className="min-w-full" src="/chara/Pisces0.png" alt="Pisces0" width={252} height={358}/>
                 <Image className="min-w-full" src="/chara/Pisces1.png" alt="Pisces1" width={252} height={358}/>
                 <Image className="min-w-full" src="/chara/Pisces2.png" alt="Pisces2" width={252} height={358}/>
@@ -251,7 +242,6 @@ const Home: NextPage = () => {
                 <Image className="min-w-full" src="/chara/Pisces5.png" alt="Pisces5" width={252} height={358}/>
               </div>
               <div id="Scorpio" className="justify-center bg-[url('/background.png')] bg-center bg-cover">
-                <h1 className="text-sm lg:text-2xl px-10 text-white font-semibold ">Scorpio</h1>
                 <Image className="min-w-full" src="/chara/Scorpio0.png" alt="Scorpio0" width={252} height={358}/>
                 <Image className="min-w-full" src="/chara/Scorpio1.png" alt="Scorpio1" width={252} height={358}/>
                 <Image className="min-w-full" src="/chara/Scorpio2.png" alt="Scorpio2" width={252} height={358}/>
@@ -260,7 +250,6 @@ const Home: NextPage = () => {
                 <Image className="min-w-full" src="/chara/Scorpio5.png" alt="Scorpio5" width={252} height={358}/>
               </div>
               <div id="Taurus" className="justify-center bg-[url('/background.png')] bg-center bg-cover">
-                <h1 className="text-sm lg:text-2xl px-10 text-white font-semibold ">Taurus</h1>
                 <Image className="min-w-full" src="/chara/Taurus0.png" alt="Taurus0" width={252} height={358}/>
                 <Image className="min-w-full" src="/chara/Taurus1.png" alt="Taurus1" width={252} height={358}/>
                 <Image className="min-w-full" src="/chara/Taurus2.png" alt="Taurus2" width={252} height={358}/>
@@ -269,7 +258,6 @@ const Home: NextPage = () => {
                 <Image className="min-w-full" src="/chara/Taurus5.png" alt="Taurus5" width={252} height={358}/>
               </div>
               <div id="Virgo" className="justify-center bg-[url('/background.png')] bg-center bg-cover">
-                <h1 className="text-sm lg:text-2xl px-10 text-white font-semibold ">Virgo</h1>
                 <Image className="min-w-full" src="/chara/Virgo0.png" alt="Virgo0" width={252} height={358}/>
                 <Image className="min-w-full" src="/chara/Virgo1.png" alt="Virgo1" width={252} height={358}/>
                 <Image className="min-w-full" src="/chara/Virgo2.png" alt="Virgo2" width={252} height={358}/>
