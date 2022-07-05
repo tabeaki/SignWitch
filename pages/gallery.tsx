@@ -266,19 +266,12 @@ const Home: NextPage = () => {
                 <Image className="min-w-full" src="/chara/Virgo5.png" alt="Virgo5" width={252} height={358}/>
               </div>
               <div id="RubblePunkz" className="justify-center bg-[url('/background.png')] bg-center bg-cover">
-                <h1 className="text-sm lg:text-2xl px-10 text-white font-semibold underline"><a className="px-2 py-4" href="https://twitter.com/Rubble_Punkz">RubblePunkz (Collabo witch)</a></h1>
                 <Image className="min-w-full" src="/chara/Wtichcollabo_RubblePunks.png" alt="Rubble" width={252} height={358}/>
               </div>
               <div id="Tempura" className="justify-center bg-[url('/background.png')] bg-center bg-cover">
-                <div>
-                  <h1 className="text-sm lg:text-2xl px-10 text-white font-semibold underline"><a className="px-2 py-4" href="https://twitter.com/entirelytempura">Tempura (Collabo witch)</a></h1>
-                </div>
                 <Image className="min-w-full" src="/chara/Wtichcollabo_Tempura.png" alt="Rubble" width={252} height={358}/>
               </div>
               <div id="JPYC" className="justify-center bg-[url('/background.png')] bg-center bg-cover">
-                <div>
-                  <h1 className="text-sm lg:text-2xl px-10 text-white font-semibold underline"><a className="px-2 py-4" href="https://twitter.com/jcam_official">JPYC (Collabo witch)</a></h1>
-                </div>
                 <Image className="min-w-full" src="/chara/JPYC_Aquarius.png" alt="JPYC_Aquarius" width={252} height={358}/>
                 <Image className="min-w-full" src="/chara/JPYC_Aries.png" alt="JPYC_Aries" width={252} height={358}/>
                 <Image className="min-w-full" src="/chara/JPYC_Cancer.png" alt="JPYC_Cancer" width={252} height={358}/>
