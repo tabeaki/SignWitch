@@ -114,9 +114,9 @@ const Home: NextPage = () => {
         try {
           let num = await contract.tokenOfOwnerByIndex(address , i);
           let URL = await contract.tokenURI(num.toNumber());
-          axios.get("https://gateway.pinata.cloud/ipfs/QmVQNm1Z5gJnCfqHEs9reX7cCu9byzs1AuqDK5SFLxQj7b/3661.json").then(res => {
+          console.log("■URL=" + URL);
+          axios.get(URL).then(res => {
             let str =res.data.attributes[1].value;
-            console.log("■" + (res.data.attributes[0].value + str.replaceAll(/\s+/g, '')));
             obj.SagittariusOriginalWitchRobe = ("SagittariusOriginalWitchRobe" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, '')))? true : false ;
             obj.SagittariusSpringDormUniform = ("SagittariusSpringDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, '')))? true : false ;
             obj.SagittariusSummerDormUniform = ("SagittariusSummerDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, '')))? true : false ;
