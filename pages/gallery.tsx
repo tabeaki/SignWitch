@@ -6,6 +6,7 @@ import Seo from './components/Seo'
 import Header from './components/Header';
 import toast, { Toaster } from 'react-hot-toast'
 import {Link as Scroll} from "react-scroll"
+import axios from "axios";
 
 declare global {
   interface Window {
@@ -16,7 +17,9 @@ declare global {
 const abi = [
   "function totalSupply() public view virtual override returns (uint256)",
   "function is_presaleActive() public view returns (bool)",
-  "function balanceOf(address owner) external view returns (uint256 balance)"
+  "function balanceOf(address owner) external view returns (uint256 balance)",
+  "function tokenOfOwnerByIndex(address owner, uint256 index) external view returns (uint256)",
+  "function tokenURI(uint256 tokenId) external view returns (string memory)"
 ]
 const contractAddress = "0x7b2152E51130439374672AF463b735a59a47ea85"
 const notify = () => toast('Starting to execute a transaction')
@@ -26,8 +29,6 @@ const Home: NextPage = () => {
   //const tokenPrice = "450";
 
   const [ownerOfNum, setOwnerOfNum] = useState(0);
-  const [paused, setpaused] = useState(false);
-  const [presaleActive, setpresaleActive] = useState(false);
 
   useEffect(() => {
     const setSaleInfo = async() =>{
@@ -41,15 +42,8 @@ const Home: NextPage = () => {
       const contract = new ethers.Contract(contractAddress, abi, signer);
 
       try{
-        const ownerOfNum = 0;
         const mintNumber = (await contract.totalSupply()).toString();
-        const paused = await contract.is_paused();
-        const presaleActive = await contract.is_presaleActive();
-        console.log("mintNumber", mintNumber);
-        console.log("paused", paused);
-        setpresaleActive(presaleActive)
         setOwnerOfNum(mintNumber)
-        setpaused(paused)  
       }catch(e){
         console.log(e)
       }
@@ -91,6 +85,12 @@ const Home: NextPage = () => {
       const contract = new ethers.Contract(contractAddress, abi, signer);
       const address = await signer.getAddress(); 
       setOwnerOfNum(await contract.balanceOf(address))
+
+      //////////////////// 図鑑機能を入れる
+     
+
+
+      ////////////////////
       if(ownerOfNum == 0){
         toast('There are 0 Astar Sing Witch witches in the connected wallet')
       } else {
@@ -101,8 +101,7 @@ const Home: NextPage = () => {
     return <>
       <div className="flex flex-wrap buttom justify-center bg-[url('/background.png')] bg-center bg-cover">
         { (ownerOfNum == 0) && <button className="absolute right-2 px-4 py-2 my-1 sm:text-sm lg:text-2xl text-white font-semibold rounded bg-gradient-to-r from-purple-600 via-purple-600 to-blue-500 hover:from-blue-500 hover:via-purple-600 hover:to-purple-600" onClick={OwnerOf}>Wallet Connect</button>}
-        { (ownerOfNum == 0) &&  <Toaster />}
-        
+        { (ownerOfNum == 0) &&  <Toaster />}        
       </div>  
           {(() => {
           if (ownerOfNum > 0) {
