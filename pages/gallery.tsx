@@ -841,7 +841,6 @@ const Home: NextPage = () => {
                   dark:text-gray-200 hover:text-blue-500 dark:hover:text-blue-400 md:mx-4 md:my-0">JPYC</a>        
                 </Scroll>
                 <button className="my-4 px-4 text-sm font-medium text-gray-700 transition-colors duration-200 rounded bg-gradient-to-r from-purple-600 via-purple-600 to-blue-500 hover:from-blue-500 hover:via-purple-600 hover:to-purple-600" onClick={OwnerOf}>NFT Connect</button>
-                <Toaster />
               </div>
               <div id="Sagittarius" className="justify-center bg-[url('/background.png')] bg-center bg-cover">
                 {(obj.SagittariusOriginalWitchRobe == true) ? <Image className="min-w-full" src="/chara/Sagittarius0.png" alt="Main Image" width={252} height={358}/> : <Image className="min-w-full" src="/NoChara/Sagittarius0.png" alt="Main Image" width={252} height={358}/>}
