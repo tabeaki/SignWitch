@@ -13,6 +13,9 @@ declare global {
     ethereum: any;
   }
 }
+axios.defaults.baseURL = 'http://localhost:3000/zukan';
+axios.defaults.headers.post['Content-Type'] = 'application/json;charset=utf-8';
+axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
 
 const abi = [
   "function totalSupply() public view virtual override returns (uint256)",
@@ -21,7 +24,7 @@ const abi = [
   "function tokenOfOwnerByIndex(address owner, uint256 index) external view returns (uint256)",
   "function tokenURI(uint256 tokenId) external view returns (string memory)"
 ]
-var obj = {SagittariusOriginalWitchRobe:false ,SagittariusSpringDormUniform:false ,SagittariusSummerDormUniform:false ,SagittariusAutumnDormUniform:false ,SagittariusWinterDormUniform:false ,SagittariusSpecialDormUniform:false,
+const obj = {SagittariusOriginalWitchRobe:false ,SagittariusSpringDormUniform:false ,SagittariusSummerDormUniform:false ,SagittariusAutumnDormUniform:false ,SagittariusWinterDormUniform:false ,SagittariusSpecialDormUniform:false,
   AquariusOriginalWitchRobe:false ,AquariusSpringDormUniform:false ,AquariusSummerDormUniform:false ,AquariusAutumnDormUniform:false ,AquariusWinterDormUniform:false ,AquariusSpecialDormUniform:false,
   AriesOriginalWitchRobe:false ,AriesSpringDormUniform:false ,AriesSummerDormUniform:false ,AriesAutumnDormUniform:false ,AriesWinterDormUniform:false ,AriesSpecialDormUniform:false,
   CancerOriginalWitchRobe:false ,CancerSpringDormUniform:false ,CancerSummerDormUniform:false ,CancerAutumnDormUniform:false ,CancerWinterDormUniform:false ,CancerSpecialDormUniform:false,
@@ -49,7 +52,6 @@ const Home: NextPage = () => {
   //const tokenPrice = "450";
 
   const [ownerOfNum, setOwnerOfNum] = useState(0);
-
   useEffect(() => {
     const setSaleInfo = async() =>{
       console.log("setSaleInfo")
@@ -60,12 +62,341 @@ const Home: NextPage = () => {
       const accounts =  await provider.send("eth_requestAccounts", []);
       const signer = provider.getSigner()
       const contract = new ethers.Contract(contractAddress, abi, signer);
+      const address = await signer.getAddress(); 
+      setOwnerOfNum(await contract.balanceOf(address))
 
       try{
         const mintNumber = (await contract.totalSupply()).toString();
         setOwnerOfNum(mintNumber)
       }catch(e){
         console.log(e)
+      }
+      setOwnerOfNum(await contract.balanceOf(address))
+
+      //////////////////// 図鑑機能を入れる
+      console.log(await contract.tokenOfOwnerByIndex(address , 1));
+      for(let i = 0; i < 500 ;i++){
+        try {
+          let num = await contract.tokenOfOwnerByIndex(address , i);
+          let URL = await contract.tokenURI(num.toNumber());
+          console.log("■URL=" + URL);
+          axios.get(URL).then(res => {
+            let str =res.data.attributes[1].value;
+            console.log("res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))=" + (res.data.attributes[0].value + str.replaceAll(/\s+/g, '')));
+            if(("SagittariusOriginalWitchRobe" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, '')))){
+              obj.SagittariusOriginalWitchRobe = true;
+            }
+            if("SagittariusSpringDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.SagittariusSpringDormUniform = true;
+            }
+            if(("SagittariusSummerDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, '')))){
+              obj.SagittariusSummerDormUniform = true;
+            }
+            if("SagittariusAutumnDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.SagittariusAutumnDormUniform = true;
+            }
+            if("SagittariusWinterDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.SagittariusWinterDormUniform = true;
+            }
+            if("SagittariusSpecialDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.SagittariusSpecialDormUniform = true;
+            }
+
+            if("AquariusOriginalWitchRobe" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.AquariusOriginalWitchRobe = true;
+            }
+            if("AquariusSpringDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.AquariusSpringDormUniform = true;
+            }
+            if("AquariusSummerDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.AquariusSummerDormUniform = true;
+            }
+            if("AquariusAutumnDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.AquariusAutumnDormUniform = true;
+            }
+            if("AquariusWinterDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.AquariusWinterDormUniform = true;
+            }
+            if("AquariusSpecialDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.AquariusSpecialDormUniform = true;
+            }
+            
+            if("AriesOriginalWitchRobe" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.AriesOriginalWitchRobe = true;
+            }
+            if("AriesSpringDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.AriesSpringDormUniform = true;
+            }
+            if("AriesSummerDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.AriesSummerDormUniform = true;
+            }
+            if("AriesAutumnDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.AriesAutumnDormUniform = true;
+            }
+            if("AriesWinterDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.AriesWinterDormUniform = true;
+            }
+            if("AriesSpecialDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.AriesSpecialDormUniform = true;
+            }
+            
+            if("CancerOriginalWitchRobe" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.CancerOriginalWitchRobe = true;
+            }
+            if("CancerSpringDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.CancerSpringDormUniform = true;
+            }
+            if("CancerSummerDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.CancerSummerDormUniform = true;
+            }
+            if("CancerAutumnDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.CancerAutumnDormUniform = true;
+            }
+            if("CancerWinterDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.CancerWinterDormUniform = true;
+            }
+            if("CancerSpecialDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.CancerSpecialDormUniform = true;
+            }
+            
+            if("CapricornOriginalWitchRobe" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.CapricornOriginalWitchRobe = true;
+            }
+            if("CapricornSpringDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.CapricornSpringDormUniform = true;
+            }
+            if("CapricornSummerDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.CapricornSummerDormUniform = true;
+            }
+            if("CapricornAutumnDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.CapricornAutumnDormUniform =true;
+            }
+            if("CapricornWinterDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.CapricornWinterDormUniform =true;
+            }
+            if("CapricornSpecialDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.CapricornSpecialDormUniform = true;
+            }
+
+            if("GeminiOriginalWitchRobe" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.GeminiOriginalWitchRobe = true;
+            }
+            if("GeminiSpringDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.GeminiSpringDormUniform = true;
+            }
+            if("GeminiSummerDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.GeminiSummerDormUniform =  true;
+            }
+            if("GeminiAutumnDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.GeminiAutumnDormUniform = true;
+            }
+            if("GeminiWinterDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.GeminiWinterDormUniform = true;
+            }
+            if("GeminiSpecialDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.GeminiSpecialDormUniform = true;
+            }
+
+            if("LeoOriginalWitchRobe" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.LeoOriginalWitchRobe = true;
+            }
+            if("LeoSpringDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.LeoSpringDormUniform = true;
+            }
+            if("LeoSummerDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.LeoSummerDormUniform = true;
+            }
+            if("LeoAutumnDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.LeoAutumnDormUniform = true;
+            }
+            if("LeoWinterDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.LeoWinterDormUniform = true;
+            }
+            if("LeoSpecialDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.LeoSpecialDormUniform = true;
+            }
+            
+            if("LibraOriginalWitchRobe" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.LibraOriginalWitchRobe = true;
+            }
+            if("LibraSpringDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.LibraSpringDormUniform = true;
+            }
+            if("LibraSummerDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.LibraSummerDormUniform = true;
+            }
+            if("LibraAutumnDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.LibraAutumnDormUniform = true;
+            }
+            if("LibraWinterDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.LibraWinterDormUniform = true;
+            }
+            if("LibraSpecialDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.LibraSpecialDormUniform = true;
+            }
+            
+            if("PiscesOriginalWitchRobe" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.PiscesOriginalWitchRobe = true;
+            }
+            if("PiscesSpringDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.PiscesSpringDormUniform = true;
+            }
+            if("PiscesSummerDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.PiscesSummerDormUniform = true;
+            }
+            if("PiscesAutumnDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.PiscesAutumnDormUniform =  true;
+            }
+            if("PiscesWinterDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.PiscesWinterDormUniform =  true;
+            }
+            if("PiscesSpecialDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.PiscesSpecialDormUniform = true;
+            }
+            
+            if("ScorpioOriginalWitchRobe" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.ScorpioOriginalWitchRobe = true;
+            }
+            if("ScorpioSpringDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.ScorpioSpringDormUniform = true;
+            }
+            if("ScorpioSummerDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.ScorpioSummerDormUniform = true;
+            }
+            if("ScorpioAutumnDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.ScorpioAutumnDormUniform = true;
+            }
+            if("ScorpioWinterDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.ScorpioWinterDormUniform = true;
+            }
+            if("ScorpioSpecialDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.ScorpioSpecialDormUniform = true;
+            }
+            
+            if("TaurusOriginalWitchRobe" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.TaurusOriginalWitchRobe = true;
+            }
+            if("TaurusSpringDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.TaurusSpringDormUniform = true;
+            }
+            if("TaurusSummerDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.TaurusSummerDormUniform = true;
+            }
+            if("TaurusAutumnDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.TaurusAutumnDormUniform = true;
+            }
+            if("TaurusWinterDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.TaurusWinterDormUniform = true;
+            }
+            if("TaurusSpecialDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))) {
+              obj.TaurusSpecialDormUniform = true;
+            }
+            
+            if("VirgoOriginalWitchRobe" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.VirgoOriginalWitchRobe = true;
+            }
+            if("VirgoSpringDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.VirgoSpringDormUniform = true;         
+            }
+            if("VirgoSummerDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.VirgoSummerDormUniform = true;
+            }
+            if("VirgoAutumnDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.VirgoAutumnDormUniform = true;
+            }
+            if("VirgoWinterDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.VirgoWinterDormUniform = true;
+            }
+            if("VirgoSpecialDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.VirgoSpecialDormUniform = true;              
+            }
+
+            // Collaboration frame from here
+            if("TempuraTempuraRobe" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.TempuraTempuraRobe = true;
+            }
+            if("RubblePunkzRubblePunkzRobe" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.RubblePunkzRubblePunkzRobe = true;
+            }
+            
+            if("SagittariusJPYCRobe" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))) {
+              obj.SagittariusJPYCRobe = true;
+            }
+            if("AquariusJPYCRobe" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))) {
+              obj.AquariusJPYCRobe = true;
+            }
+            if("AriesJPYCRobe" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))) {
+              obj.AriesJPYCRobe = true;
+            }
+            if("CancerJPYCRobe" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.CancerJPYCRobe = true;
+            }
+            if("CapricornJPYCRobe" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.CapricornJPYCRobe = true;
+            }
+            if("CeminiJPYCRobe" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.CeminiJPYCRobe = true;
+            }
+            if("LeoJPYCRobe" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.LeoJPYCRobe = true;
+            }
+            if("LibraJPYCRobe" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.LibraJPYCRobe = true;
+            }
+            if("PiscesJPYCRobe" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.PiscesJPYCRobe = true;
+            }
+            if("ScorpioJPYCRobe" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.ScorpioJPYCRobe = true;
+            }
+            if("TaurusJPYCRobe" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.TaurusJPYCRobe = true;
+            }
+            if("VirgoJPYCRobe" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.VirgoJPYCRobe = true;
+            }
+            
+            if("SagittariusCryptoMaidsRobe" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.SagittariusCryptoMaidsRobe = true;
+            }
+            if("AquariusCryptoMaidsRobe" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.AquariusCryptoMaidsRobe = true;
+            }
+            if("AriesCryptoMaidsRobe" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.AriesCryptoMaidsRobe = true;
+            }
+            if("CancerCryptoMaidsRobe" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.CancerCryptoMaidsRobe = true;
+            }
+            if("CapricornCryptoMaidsRobe" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.CapricornCryptoMaidsRobe = true;
+            }
+            if("CeminiCryptoMaidsRobe" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.CeminiCryptoMaidsRobe = true;
+            }
+            if("LeoCryptoMaidsRobe" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.LeoCryptoMaidsRobe = true;
+            }
+            if("LibraCryptoMaidsRobe" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.LibraCryptoMaidsRobe = true;
+            }
+            if("PiscesCryptoMaidsRobe" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.PiscesCryptoMaidsRobe = true;
+            }
+            if("ScorpioCryptoMaidsRobe" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.ScorpioCryptoMaidsRobe = true;
+            }
+            if("TaurusCryptoMaidsRobe" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.TaurusCryptoMaidsRobe = true;
+            }
+            if("VirgoCryptoMaidsRobe" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.VirgoCryptoMaidsRobe = true;
+            }    
+          });
+          
+        } catch {
+          break; 
+        } 
       }
     }
 
@@ -95,156 +426,341 @@ const Home: NextPage = () => {
       }
     }
     addChain();
-
   }, []);
   // ミントボタン用
   function OwnerOf() {
     const OwnerOf = async () =>{
-      const provider = new ethers.providers.Web3Provider((window as any).ethereum)
-      const signer = provider.getSigner()
-      const contract = new ethers.Contract(contractAddress, abi, signer);
+      const provider = await new ethers.providers.Web3Provider((window as any).ethereum)
+      const signer = await provider.getSigner()
+      const contract = await new ethers.Contract(contractAddress, abi, signer);
       const address = await signer.getAddress(); 
       setOwnerOfNum(await contract.balanceOf(address))
 
       //////////////////// 図鑑機能を入れる
-
-
       console.log(await contract.tokenOfOwnerByIndex(address , 1));
-      for(let i = 1; i < 500 ;i++){
+      for(let i = 0; i < 500 ;i++){
         try {
           let num = await contract.tokenOfOwnerByIndex(address , i);
           let URL = await contract.tokenURI(num.toNumber());
           console.log("■URL=" + URL);
           axios.get(URL).then(res => {
             let str =res.data.attributes[1].value;
-            obj.SagittariusOriginalWitchRobe = ("SagittariusOriginalWitchRobe" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, '')))? true : false ;
-            obj.SagittariusSpringDormUniform = ("SagittariusSpringDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, '')))? true : false ;
-            obj.SagittariusSummerDormUniform = ("SagittariusSummerDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, '')))? true : false ;
-            obj.SagittariusAutumnDormUniform = ("SagittariusAutumnDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, '')))? true : false ;
-            obj.SagittariusWinterDormUniform = ("SagittariusWinterDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, '')))? true : false ;
-            obj.SagittariusSpecialDormUniform = ("SagittariusSpecialDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, '')))? true : false ;
+            console.log("res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))=" + (res.data.attributes[0].value + str.replaceAll(/\s+/g, '')));
+            if(("SagittariusOriginalWitchRobe" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, '')))){
+              obj.SagittariusOriginalWitchRobe = true;
+            }
+            if("SagittariusSpringDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.SagittariusSpringDormUniform = true;
+            }
+            if(("SagittariusSummerDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, '')))){
+              obj.SagittariusSummerDormUniform = true;
+            }
+            if("SagittariusAutumnDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.SagittariusAutumnDormUniform = true;
+            }
+            if("SagittariusWinterDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.SagittariusWinterDormUniform = true;
+            }
+            if("SagittariusSpecialDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.SagittariusSpecialDormUniform = true;
+            }
 
-            obj.AquariusOriginalWitchRobe = ("AquariusOriginalWitchRobe" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, '')))? true : false ;
-            obj.AquariusSpringDormUniform = ("AquariusSpringDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, '')))? true : false ;
-            obj.AquariusSummerDormUniform = ("AquariusSummerDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, '')))? true : false ;
-            obj.AquariusAutumnDormUniform = ("AquariusAutumnDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, '')))? true : false ;
-            obj.AquariusWinterDormUniform = ("AquariusWinterDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, '')))? true : false ;
-            obj.AquariusSpecialDormUniform = ("AquariusSpecialDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, '')))? true : false ;
+            if("AquariusOriginalWitchRobe" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.AquariusOriginalWitchRobe = true;
+            }
+            if("AquariusSpringDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.AquariusSpringDormUniform = true;
+            }
+            if("AquariusSummerDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.AquariusSummerDormUniform = true;
+            }
+            if("AquariusAutumnDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.AquariusAutumnDormUniform = true;
+            }
+            if("AquariusWinterDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.AquariusWinterDormUniform = true;
+            }
+            if("AquariusSpecialDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.AquariusSpecialDormUniform = true;
+            }
+            
+            if("AriesOriginalWitchRobe" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.AriesOriginalWitchRobe = true;
+            }
+            if("AriesSpringDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.AriesSpringDormUniform = true;
+            }
+            if("AriesSummerDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.AriesSummerDormUniform = true;
+            }
+            if("AriesAutumnDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.AriesAutumnDormUniform = true;
+            }
+            if("AriesWinterDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.AriesWinterDormUniform = true;
+            }
+            if("AriesSpecialDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.AriesSpecialDormUniform = true;
+            }
+            
+            if("CancerOriginalWitchRobe" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.CancerOriginalWitchRobe = true;
+            }
+            if("CancerSpringDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.CancerSpringDormUniform = true;
+            }
+            if("CancerSummerDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.CancerSummerDormUniform = true;
+            }
+            if("CancerAutumnDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.CancerAutumnDormUniform = true;
+            }
+            if("CancerWinterDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.CancerWinterDormUniform = true;
+            }
+            if("CancerSpecialDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.CancerSpecialDormUniform = true;
+            }
+            
+            if("CapricornOriginalWitchRobe" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.CapricornOriginalWitchRobe = true;
+            }
+            if("CapricornSpringDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.CapricornSpringDormUniform = true;
+            }
+            if("CapricornSummerDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.CapricornSummerDormUniform = true;
+            }
+            if("CapricornAutumnDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.CapricornAutumnDormUniform =true;
+            }
+            if("CapricornWinterDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.CapricornWinterDormUniform =true;
+            }
+            if("CapricornSpecialDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.CapricornSpecialDormUniform = true;
+            }
 
-            obj.AriesOriginalWitchRobe = ("AriesOriginalWitchRobe" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, '')))? true : false ;
-            obj.AriesSpringDormUniform = ("AriesSpringDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, '')))? true : false ;
-            obj.AriesSummerDormUniform = ("AriesSummerDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, '')))? true : false ;
-            obj.AriesAutumnDormUniform = ("AriesAutumnDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, '')))? true : false ;
-            obj.AriesWinterDormUniform = ("AriesWinterDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, '')))? true : false ;
-            obj.AriesSpecialDormUniform = ("AriesSpecialDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, '')))? true : false ;
+            if("GeminiOriginalWitchRobe" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.GeminiOriginalWitchRobe = true;
+            }
+            if("GeminiSpringDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.GeminiSpringDormUniform = true;
+            }
+            if("GeminiSummerDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.GeminiSummerDormUniform =  true;
+            }
+            if("GeminiAutumnDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.GeminiAutumnDormUniform = true;
+            }
+            if("GeminiWinterDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.GeminiWinterDormUniform = true;
+            }
+            if("GeminiSpecialDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.GeminiSpecialDormUniform = true;
+            }
 
-            obj.CancerOriginalWitchRobe = ("CancerOriginalWitchRobe" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, '')))? true : false ;
-            obj.CancerSpringDormUniform = ("CancerSpringDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, '')))? true : false ;
-            obj.CancerSummerDormUniform = ("CancerSummerDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, '')))? true : false ;
-            obj.CancerAutumnDormUniform = ("CancerAutumnDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, '')))? true : false ;
-            obj.CancerWinterDormUniform = ("CancerWinterDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, '')))? true : false ;
-            obj.CancerSpecialDormUniform = ("CancerSpecialDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, '')))? true : false ;
+            if("LeoOriginalWitchRobe" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.LeoOriginalWitchRobe = true;
+            }
+            if("LeoSpringDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.LeoSpringDormUniform = true;
+            }
+            if("LeoSummerDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.LeoSummerDormUniform = true;
+            }
+            if("LeoAutumnDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.LeoAutumnDormUniform = true;
+            }
+            if("LeoWinterDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.LeoWinterDormUniform = true;
+            }
+            if("LeoSpecialDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.LeoSpecialDormUniform = true;
+            }
+            
+            if("LibraOriginalWitchRobe" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.LibraOriginalWitchRobe = true;
+            }
+            if("LibraSpringDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.LibraSpringDormUniform = true;
+            }
+            if("LibraSummerDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.LibraSummerDormUniform = true;
+            }
+            if("LibraAutumnDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.LibraAutumnDormUniform = true;
+            }
+            if("LibraWinterDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.LibraWinterDormUniform = true;
+            }
+            if("LibraSpecialDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.LibraSpecialDormUniform = true;
+            }
+            
+            if("PiscesOriginalWitchRobe" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.PiscesOriginalWitchRobe = true;
+            }
+            if("PiscesSpringDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.PiscesSpringDormUniform = true;
+            }
+            if("PiscesSummerDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.PiscesSummerDormUniform = true;
+            }
+            if("PiscesAutumnDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.PiscesAutumnDormUniform =  true;
+            }
+            if("PiscesWinterDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.PiscesWinterDormUniform =  true;
+            }
+            if("PiscesSpecialDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.PiscesSpecialDormUniform = true;
+            }
+            
+            if("ScorpioOriginalWitchRobe" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.ScorpioOriginalWitchRobe = true;
+            }
+            if("ScorpioSpringDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.ScorpioSpringDormUniform = true;
+            }
+            if("ScorpioSummerDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.ScorpioSummerDormUniform = true;
+            }
+            if("ScorpioAutumnDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.ScorpioAutumnDormUniform = true;
+            }
+            if("ScorpioWinterDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.ScorpioWinterDormUniform = true;
+            }
+            if("ScorpioSpecialDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.ScorpioSpecialDormUniform = true;
+            }
+            
+            if("TaurusOriginalWitchRobe" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.TaurusOriginalWitchRobe = true;
+            }
+            if("TaurusSpringDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.TaurusSpringDormUniform = true;
+            }
+            if("TaurusSummerDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.TaurusSummerDormUniform = true;
+            }
+            if("TaurusAutumnDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.TaurusAutumnDormUniform = true;
+            }
+            if("TaurusWinterDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.TaurusWinterDormUniform = true;
+            }
+            if("TaurusSpecialDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))) {
+              obj.TaurusSpecialDormUniform = true;
+            }
+            
+            if("VirgoOriginalWitchRobe" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.VirgoOriginalWitchRobe = true;
+            }
+            if("VirgoSpringDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.VirgoSpringDormUniform = true;         
+            }
+            if("VirgoSummerDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.VirgoSummerDormUniform = true;
+            }
+            if("VirgoAutumnDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.VirgoAutumnDormUniform = true;
+            }
+            if("VirgoWinterDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.VirgoWinterDormUniform = true;
+            }
+            if("VirgoSpecialDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.VirgoSpecialDormUniform = true;              
+            }
 
-            obj.CapricornOriginalWitchRobe = ("CapricornOriginalWitchRobe" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, '')))? true : false ;
-            obj.CapricornSpringDormUniform = ("CapricornSpringDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, '')))? true : false ;
-            obj.CapricornSummerDormUniform = ("CapricornSummerDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, '')))? true : false ;
-            obj.CapricornAutumnDormUniform = ("CapricornAutumnDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, '')))? true : false ;
-            obj.CapricornWinterDormUniform = ("CapricornWinterDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, '')))? true : false ;
-            obj.CapricornSpecialDormUniform = ("CapricornSpecialDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, '')))? true : false ;
-
-            obj.GeminiOriginalWitchRobe = ("CeminiOriginalWitchRobe" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, '')))? true : false ;
-            obj.GeminiSpringDormUniform = ("CeminiSpringDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, '')))? true : false ;
-            obj.GeminiSummerDormUniform = ("CeminiSummerDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, '')))? true : false ;
-            obj.GeminiAutumnDormUniform = ("CeminiAutumnDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, '')))? true : false ;
-            obj.GeminiWinterDormUniform = ("CeminiWinterDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, '')))? true : false ;
-            obj.GeminiSpecialDormUniform = ("CeminiSpecialDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, '')))? true : false ;
-
-            obj.LeoOriginalWitchRobe = ("LeoOriginalWitchRobe" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, '')))? true : false ;
-            obj.LeoSpringDormUniform = ("LeoSpringDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, '')))? true : false ;
-            obj.LeoSummerDormUniform = ("LeoSummerDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, '')))? true : false ;
-            obj.LeoAutumnDormUniform = ("LeoAutumnDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, '')))? true : false ;
-            obj.LeoWinterDormUniform = ("LeoWinterDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, '')))? true : false ;
-            obj.LeoSpecialDormUniform = ("LeoSpecialDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, '')))? true : false ;
-
-            obj.LibraOriginalWitchRobe = ("LibraOriginalWitchRobe" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, '')))? true : false ;
-            obj.LibraSpringDormUniform = ("LibraSpringDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, '')))? true : false ;
-            obj.LibraSummerDormUniform = ("LibraSummerDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, '')))? true : false ;
-            obj.LibraAutumnDormUniform = ("LibraAutumnDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, '')))? true : false ;
-            obj.LibraWinterDormUniform = ("LibraWinterDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, '')))? true : false ;
-            obj.LibraSpecialDormUniform = ("LibraSpecialDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, '')))? true : false ;
-
-            obj.PiscesOriginalWitchRobe = ("PiscesOriginalWitchRobe" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, '')))? true : false ;
-            obj.PiscesSpringDormUniform = ("PiscesSpringDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, '')))? true : false ;
-            obj.PiscesSummerDormUniform = ("PiscesSummerDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, '')))? true : false ;
-            obj.PiscesAutumnDormUniform = ("PiscesAutumnDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, '')))? true : false ;
-            obj.PiscesWinterDormUniform = ("PiscesWinterDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, '')))? true : false ;
-            obj.PiscesSpecialDormUniform = ("PiscesSpecialDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, '')))? true : false ;
-
-            obj.ScorpioOriginalWitchRobe = ("ScorpioOriginalWitchRobe" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, '')))? true : false ;
-            obj.ScorpioSpringDormUniform = ("ScorpioSpringDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, '')))? true : false ;
-            obj.ScorpioSummerDormUniform = ("ScorpioSummerDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, '')))? true : false ;
-            obj.ScorpioAutumnDormUniform = ("ScorpioAutumnDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, '')))? true : false ;
-            obj.ScorpioWinterDormUniform = ("ScorpioWinterDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, '')))? true : false ;
-            obj.ScorpioSpecialDormUniform = ("ScorpioSpecialDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, '')))? true : false ;
-
-            obj.TaurusOriginalWitchRobe = ("TaurusOriginalWitchRobe" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, '')))? true : false ;
-            obj.TaurusSpringDormUniform = ("TaurusSpringDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, '')))? true : false ;
-            obj.TaurusSummerDormUniform = ("TaurusSummerDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, '')))? true : false ;
-            obj.TaurusAutumnDormUniform = ("TaurusAutumnDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, '')))? true : false ;
-            obj.TaurusWinterDormUniform = ("TaurusWinterDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, '')))? true : false ;
-            obj.TaurusSpecialDormUniform = ("TaurusSpecialDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, '')))? true : false ;
-
-            obj.VirgoOriginalWitchRobe = ("VirgoOriginalWitchRobe" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, '')))? true : false ;
-            obj.VirgoSpringDormUniform = ("VirgoSpringDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, '')))? true : false ;
-            obj.VirgoSummerDormUniform = ("VirgoSummerDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, '')))? true : false ;
-            obj.VirgoAutumnDormUniform = ("VirgoAutumnDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, '')))? true : false ;
-            obj.VirgoWinterDormUniform = ("VirgoWinterDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, '')))? true : false ;
-            obj.VirgoSpecialDormUniform = ("VirgoSpecialDormUniform" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, '')))? true : false ;
             // Collaboration frame from here
-            obj.TempuraTempuraRobe = ("TempuraTempuraRobe" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, '')))? true : false ;
-            obj.RubblePunkzRubblePunkzRobe = ("RubblePunkzRubblePunkzRobe" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, '')))? true : false ;
-
-            obj.SagittariusJPYCRobe = ("SagittariusJPYCRobe" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, '')))? true : false ;
-            obj.AquariusJPYCRobe = ("AquariusJPYCRobe" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, '')))? true : false ;
-            obj.AriesJPYCRobe = ("AriesJPYCRobe" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, '')))? true : false ;
-            obj.CancerJPYCRobe = ("CancerJPYCRobe" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, '')))? true : false ;
-            obj.CapricornJPYCRobe = ("CapricornJPYCRobe" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, '')))? true : false ;
-            obj.CeminiJPYCRobe = ("CeminiJPYCRobe" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, '')))? true : false ;
-            obj.LeoJPYCRobe = ("LeoJPYCRobe" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, '')))? true : false ;
-            obj.LibraJPYCRobe = ("LibraJPYCRobe" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, '')))? true : false ;
-            obj.PiscesJPYCRobe = ("PiscesJPYCRobe" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, '')))? true : false ;
-            obj.ScorpioJPYCRobe = ("ScorpioJPYCRobe" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, '')))? true : false ;
-            obj.TaurusJPYCRobe = ("TaurusJPYCRobe" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, '')))? true : false ;
-            obj.VirgoJPYCRobe = ("VirgoJPYCRobe" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, '')))? true : false ;
-
-            obj.SagittariusCryptoMaidsRobe = ("SagittariusCryptoMaidsRobe" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, '')))? true : false ;
-            obj.AquariusCryptoMaidsRobe = ("AquariusCryptoMaidsRobe" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, '')))? true : false ;
-            obj.AriesCryptoMaidsRobe = ("AriesCryptoMaidsRobe" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, '')))? true : false ;
-            obj.CancerCryptoMaidsRobe = ("CancerCryptoMaidsRobe" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, '')))? true : false ;
-            obj.CapricornCryptoMaidsRobe = ("CapricornCryptoMaidsRobe" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, '')))? true : false ;
-            obj.CeminiCryptoMaidsRobe = ("CeminiCryptoMaidsRobe" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, '')))? true : false ;
-            obj.LeoCryptoMaidsRobe = ("LeoCryptoMaidsRobe" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, '')))? true : false ;
-            obj.LibraCryptoMaidsRobe = ("LibraCryptoMaidsRobe" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, '')))? true : false ;
-            obj.PiscesCryptoMaidsRobe = ("PiscesCryptoMaidsRobe" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, '')))? true : false ;
-            obj.ScorpioCryptoMaidsRobe = ("ScorpioCryptoMaidsRobe" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, '')))? true : false ;
-            obj.TaurusCryptoMaidsRobe = ("TaurusCryptoMaidsRobe" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, '')))? true : false ;
-            obj.VirgoCryptoMaidsRobe = ("VirgoCryptoMaidsRobe" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, '')))? true : false ;
-
-            console.log("obj.SagittariusWinterDormUniform=" + obj.SagittariusWinterDormUniform);
+            if("TempuraTempuraRobe" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.TempuraTempuraRobe = true;
+            }
+            if("RubblePunkzRubblePunkzRobe" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.RubblePunkzRubblePunkzRobe = true;
+            }
+            
+            if("SagittariusJPYCRobe" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))) {
+              obj.SagittariusJPYCRobe = true;
+            }
+            if("AquariusJPYCRobe" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))) {
+              obj.AquariusJPYCRobe = true;
+            }
+            if("AriesJPYCRobe" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))) {
+              obj.AriesJPYCRobe = true;
+            }
+            if("CancerJPYCRobe" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.CancerJPYCRobe = true;
+            }
+            if("CapricornJPYCRobe" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.CapricornJPYCRobe = true;
+            }
+            if("CeminiJPYCRobe" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.CeminiJPYCRobe = true;
+            }
+            if("LeoJPYCRobe" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.LeoJPYCRobe = true;
+            }
+            if("LibraJPYCRobe" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.LibraJPYCRobe = true;
+            }
+            if("PiscesJPYCRobe" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.PiscesJPYCRobe = true;
+            }
+            if("ScorpioJPYCRobe" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.ScorpioJPYCRobe = true;
+            }
+            if("TaurusJPYCRobe" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.TaurusJPYCRobe = true;
+            }
+            if("VirgoJPYCRobe" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.VirgoJPYCRobe = true;
+            }
+            
+            if("SagittariusCryptoMaidsRobe" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.SagittariusCryptoMaidsRobe = true;
+            }
+            if("AquariusCryptoMaidsRobe" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.AquariusCryptoMaidsRobe = true;
+            }
+            if("AriesCryptoMaidsRobe" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.AriesCryptoMaidsRobe = true;
+            }
+            if("CancerCryptoMaidsRobe" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.CancerCryptoMaidsRobe = true;
+            }
+            if("CapricornCryptoMaidsRobe" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.CapricornCryptoMaidsRobe = true;
+            }
+            if("CeminiCryptoMaidsRobe" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.CeminiCryptoMaidsRobe = true;
+            }
+            if("LeoCryptoMaidsRobe" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.LeoCryptoMaidsRobe = true;
+            }
+            if("LibraCryptoMaidsRobe" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.LibraCryptoMaidsRobe = true;
+            }
+            if("PiscesCryptoMaidsRobe" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.PiscesCryptoMaidsRobe = true;
+            }
+            if("ScorpioCryptoMaidsRobe" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.ScorpioCryptoMaidsRobe = true;
+            }
+            if("TaurusCryptoMaidsRobe" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.TaurusCryptoMaidsRobe = true;
+            }
+            if("VirgoCryptoMaidsRobe" == (res.data.attributes[0].value + str.replaceAll(/\s+/g, ''))){
+              obj.VirgoCryptoMaidsRobe = true;
+            }    
           });
-          // fetch(URL) //api
-          // .then(res => res.json()) 
-          // .then(json => {
-          //   console.log(json);
-          // });
-
+          
         } catch {
           break; 
         } 
       }
-      console.log('aaaaa');
-
-
       ////////////////////
       if(ownerOfNum == 0){
         toast('There are 0 Astar Sing Witch witches in the connected wallet')
@@ -255,14 +771,13 @@ const Home: NextPage = () => {
     
     return <>
       <div className="flex flex-wrap buttom justify-center bg-[url('/background.png')] bg-center bg-cover">
-      <button className="absolute right-2 px-4 py-2 my-1 sm:text-sm lg:text-2xl text-white font-semibold rounded bg-gradient-to-r from-purple-600 via-purple-600 to-blue-500 hover:from-blue-500 hover:via-purple-600 hover:to-purple-600" onClick={OwnerOf}>Wallet Connect</button>
         { (ownerOfNum == 0) && <button className="absolute right-2 px-4 py-2 my-1 sm:text-sm lg:text-2xl text-white font-semibold rounded bg-gradient-to-r from-purple-600 via-purple-600 to-blue-500 hover:from-blue-500 hover:via-purple-600 hover:to-purple-600" onClick={OwnerOf}>Wallet Connect</button>}
-        { (ownerOfNum == 0) &&  <Toaster />}
-        
+        { (ownerOfNum == 0) &&  <Toaster />}        
       </div>  
           {(() => {
           if (ownerOfNum > 0) {
             return <span>
+
               <div className="justify-center bg-[url('/background.png')] bg-center bg-cover">
                 <Scroll to="Sagittarius" smooth={true} duration={600} offset={-30}>
                   <a className="my-1 text-sm font-medium text-gray-700 transition-colors duration-200 transform 
@@ -324,6 +839,8 @@ const Home: NextPage = () => {
                   <a className="my-1 text-sm font-medium text-gray-700 transition-colors duration-200 transform 
                   dark:text-gray-200 hover:text-blue-500 dark:hover:text-blue-400 md:mx-4 md:my-0">JPYC</a>        
                 </Scroll>
+                <button className="my-4 px-4 text-sm font-medium text-gray-700 transition-colors duration-200 rounded bg-gradient-to-r from-purple-600 via-purple-600 to-blue-500 hover:from-blue-500 hover:via-purple-600 hover:to-purple-600" onClick={OwnerOf}>NFT Connect</button>
+                <Toaster />
               </div>
               <div id="Sagittarius" className="justify-center bg-[url('/background.png')] bg-center bg-cover">
                 {(obj.SagittariusOriginalWitchRobe == true) ? <Image className="min-w-full" src="/chara/Sagittarius0.png" alt="Main Image" width={252} height={358}/> : <Image className="min-w-full" src="/NoChara/Sagittarius0.png" alt="Main Image" width={252} height={358}/>}
