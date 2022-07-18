@@ -86,6 +86,16 @@ const Home: NextPage = () => {
     addChain();
 
   }, []);
+
+  function catsLink(){
+    window.open('https://twitter.com/AstarCatsNft', '_blank');
+  }
+  function JPYCLink(){
+    window.open('https://twitter.com/jcam_official/status/1540273530394365952', '_blank');
+  }
+  function TempuraLink(){
+    window.open('https://twitter.com/entirelytempura', '_blank');
+  }
   // ミントボタン用
   function MintButton() {
 
@@ -124,6 +134,21 @@ const Home: NextPage = () => {
         <h1 className="text-base lg:text-5xl pt-1 pb-2 text-white font-semibold "> 10800 / 10800</h1>        
         { (!paused && mintNum >= 10800) && <h3 className="sm:text-lg lg:text-3xl pt-1 text-white font-semibold ">End of sale</h3>}
         <a className="text-sm lg:text-2xl pt-1 text-white underline" href="https://tofunft.com/collection/astar-sign-witch/activities" >market palace</a>
+      </div>
+    </div>
+    <div className="flex flex-wrap buttom justify-center bg-[url('/background.png')] bg-center bg-cover">
+      <div className='px-2 py-16 lg:px-28 lg:py-28'>
+        <Image className="min-w-full" src="/Cats.png" onClick={catsLink} alt="Main Image" width={1020} height={680}/>
+      </div>
+    </div>
+    <div className="flex flex-wrap buttom justify-center bg-[url('/background.png')] bg-center bg-cover">
+      <div className='px-2 py-16 lg:px-28 lg:py-28'>
+        <Image className="min-w-full" src="/JPYC.png" onClick={JPYCLink} alt="Main Image" width={1020} height={680}/>
+      </div>
+    </div>  
+    <div className="flex flex-wrap buttom justify-center bg-[url('/background.png')] bg-center bg-cover">
+      <div className='px-2 py-16 lg:px-28 lg:py-28'>
+        <Image className="min-w-full" src="/Tempura.png" onClick={TempuraLink} alt="Main Image" width={1020} height={680}/>
       </div>
     </div>  
     </>
